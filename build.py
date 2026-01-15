@@ -9,10 +9,11 @@ import subprocess
 import sys
 from pathlib import Path
 
+
 def detect_platform():
     """Detect the current platform"""
     system = platform.system().lower()
-    
+
     if system == "windows":
         return "windows"
     elif system == "darwin":
@@ -23,25 +24,26 @@ def detect_platform():
         print(f"Unsupported platform: {system}")
         return None
 
+
 def build_for_platform(platform_name):
     """Build executables for the specified platform"""
     print(f"Building for platform: {platform_name}")
-    
+
     build_scripts = {
         "windows": "build_windows.py",
         "macos": "build_macos.py",
-        "linux": "build_linux.py"
+        "linux": "build_linux.py",
     }
-    
+
     script_path = build_scripts.get(platform_name)
     if not script_path:
         print(f"No build script available for platform: {platform_name}")
         return False
-    
+
     if not Path(script_path).exists():
         print(f"Build script not found: {script_path}")
         return False
-    
+
     try:
         print(f"Running {script_path}...")
         subprocess.check_call([sys.executable, script_path])
@@ -50,53 +52,55 @@ def build_for_platform(platform_name):
         print(f"Build failed: {e}")
         return False
 
+
 def build_all():
     """Build executables for all platforms (cross-platform build)"""
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("CROSS-PLATFORM BUILD")
-    print("="*60)
+    print("=" * 60)
     print("Note: This will attempt to build for all platforms.")
     print("Some builds may fail if you're not on the target platform.")
     print()
-    
+
     platforms = ["windows", "macos", "linux"]
     results = {}
-    
+
     for platform_name in platforms:
-        print(f"\n{'-'*40}")
+        print(f"\n{'-' * 40}")
         print(f"Building for {platform_name.upper()}")
-        print(f"{'-'*40}")
-        
+        print(f"{'-' * 40}")
+
         success = build_for_platform(platform_name)
         results[platform_name] = success
-        
+
         if success:
             print(f"✓ {platform_name} build completed")
         else:
             print(f"✗ {platform_name} build failed")
-    
+
     # Summary
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print("BUILD SUMMARY")
-    print(f"{'='*60}")
-    
+    print(f"{'=' * 60}")
+
     for platform_name, success in results.items():
         status = "✓ SUCCESS" if success else "✗ FAILED"
         print(f"{platform_name.upper():10} : {status}")
-    
+
     total_success = sum(results.values())
     print(f"\nTotal: {total_success}/{len(platforms)} platforms built successfully")
-    
+
     return total_success > 0
+
 
 def main():
     """Main build function"""
     print("EML Extractor - Universal Build Script")
-    print("="*60)
-    
+    print("=" * 60)
+
     if len(sys.argv) > 1:
         command = sys.argv[1].lower()
-        
+
         if command == "all":
             success = build_all()
         elif command in ["windows", "macos", "linux"]:
@@ -112,12 +116,13 @@ def main():
             success = build_for_platform(platform_name)
         else:
             success = False
-    
+
     if success:
         print("\n✓ Build completed successfully!")
     else:
         print("\n✗ Build failed!")
         sys.exit(1)
+
 
 def print_usage():
     """Print usage information"""
@@ -127,6 +132,7 @@ def print_usage():
     print("  python build.py macos       # Build macOS executables")
     print("  python build.py linux       # Build Linux executables")
     print("  python build.py all         # Build for all platforms")
+
 
 if __name__ == "__main__":
     main()

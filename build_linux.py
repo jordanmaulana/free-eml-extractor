@@ -10,68 +10,75 @@ import subprocess
 import shutil
 from pathlib import Path
 
+
 def install_pyinstaller():
     """Install PyInstaller if not already installed"""
     try:
         import PyInstaller
+
         print("✓ PyInstaller already installed")
     except ImportError:
         print("Installing PyInstaller...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "pyinstaller>=6.0"])
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", "pyinstaller>=6.0"]
+        )
         print("✓ PyInstaller installed successfully")
+
 
 def build_executable():
     """Build Linux executable"""
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("BUILDING LINUX EXECUTABLE")
-    print("="*60)
-    
+    print("=" * 60)
+
     # Install PyInstaller
     install_pyinstaller()
-    
+
     # Clean previous builds
     dist_dir = Path("dist")
     build_dir = Path("build")
     spec_dir = Path("spec")
-    
+
     for dir_path in [dist_dir, build_dir, spec_dir]:
         if dir_path.exists():
             shutil.rmtree(dir_path)
             print(f"✓ Cleaned {dir_path}")
-    
+
     # Build GUI executable
     print("\nBuilding GUI executable...")
     gui_cmd = [
-        sys.executable, "-m", "PyInstaller",
+        sys.executable,
+        "-m",
+        "PyInstaller",
         "--onefile",
         "--name=eml-extractor-gui",
         "--icon=NONE",
         "--distpath=dist/linux",
         "--workpath=build/linux",
         "--specpath=spec/linux",
-        "gui.py"
+        "gui.py",
     ]
-    
+
     try:
         subprocess.check_call(gui_cmd)
         print("✓ GUI executable built successfully")
     except subprocess.CalledProcessError as e:
         print(f"✗ GUI build failed: {e}")
         return False
-    
+
     # Create output directory with proper structure
     output_dir = Path("dist/linux/EML_Extractor")
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # Copy executable
     gui_exe = Path("dist/linux/eml-extractor-gui")
-    
+
     if gui_exe.exists():
         shutil.copy2(gui_exe, output_dir / "eml-extractor-gui")
         # Make executable
         os.chmod(output_dir / "eml-extractor-gui", 0o755)
         print(f"✓ Copied GUI executable to {output_dir}")
-    
+
     # Create desktop entry for GUI
     desktop_entry = """[Desktop Entry]
 Version=1.0
@@ -84,10 +91,10 @@ Terminal=false
 Categories=Office;Utility;
 MimeType=application/x-eml;
 """
-    
+
     with open(output_dir / "eml-extractor.desktop", "w", encoding="utf-8") as f:
         f.write(desktop_entry)
-    
+
     # Create installation script
     install_script = """#!/bin/bash
 # Installation script for EML Extractor
@@ -115,13 +122,13 @@ update-desktop-database "$DESKTOP_DIR" 2>/dev/null || true
 echo "Installation complete!"
 echo "You can now run 'eml-extractor-gui' from the terminal or find it in your applications menu."
 """
-    
+
     with open(output_dir / "install.sh", "w", encoding="utf-8") as f:
         f.write(install_script)
-    
+
     # Make install script executable
     os.chmod(output_dir / "install.sh", 0o755)
-    
+
     # Create README for the package
     readme_content = """# EML Extractor - Linux Version
 
@@ -163,15 +170,16 @@ eml-extractor-gui
 - Modern GUI with progress tracking
 - Desktop integration
 """
-    
+
     with open(output_dir / "README.txt", "w", encoding="utf-8") as f:
         f.write(readme_content)
-    
+
     print(f"\n✓ Linux executable created in: {output_dir.absolute()}")
-    print(f"  - eml-extractor-gui: {gui_exe.stat().st_size / (1024*1024):.1f} MB")
-    print(f"  - Installation script: install.sh")
-    
+    print(f"  - eml-extractor-gui: {gui_exe.stat().st_size / (1024 * 1024):.1f} MB")
+    print("  - Installation script: install.sh")
+
     return True
+
 
 if __name__ == "__main__":
     success = build_executable()
