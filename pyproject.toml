@@ -1,7 +1,11 @@
 [project]
 name = "eml-extractor"
 version = "0.1.0"
-description = "Add your description here"
+description = "A modern GUI tool for batch extracting .eml files with attachments and metadata"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.8"
 dependencies = []
+
+[project.scripts]
+eml-extractor = "main:main"
+eml-extractor-gui = "gui:main"
