@@ -23,7 +23,7 @@ A Python utility to batch extract and process `.eml` files, converting each emai
 
 Download the pre-built Windows executables:
 
-**[📥 Download Windows Executables](https://github.com/jordanmaulana/eml-extractor/releases/EMLExtractorGUI.exe)**
+**[📥 Download Windows Executables](https://github.com/jordanmaulana/free-eml-extractor/raw/main/releases/windows/EMLExtractorGUI.exe)**
 
 - **EMLExtractorGUI.exe**: Graphical interface (recommended)
 - No Python installation required
@@ -100,7 +100,7 @@ Each email's `headers.txt` includes:
 
 ### Option 1: Windows Executable (Easiest)
 
-**[📥 Download Windows Executables](https://github.com/jordanmaulana/free-eml-extractor/releases/windows/EMLExtractorGUI.exe)**
+**[📥 Download Windows Executables](https://github.com/jordanmaulana/free-eml-extractor/raw/main/releases/windows/EMLExtractorGUI.exe)**
 
 1. Download the latest Windows release
 2. Extract the ZIP file
