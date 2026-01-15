@@ -10,5 +10,4 @@ dependencies = []
 build = ["pyinstaller>=6.0"]
 
 [project.scripts]
-eml-extractor = "main:main"
 eml-extractor-gui = "gui:main"

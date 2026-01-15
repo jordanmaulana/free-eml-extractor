@@ -23,10 +23,9 @@ A Python utility to batch extract and process `.eml` files, converting each emai
 
 Download the pre-built Windows executables:
 
-**[📥 Download Windows Executables](https://github.com/yourusername/eml-extractor/releases/latest)**
+**[📥 Download Windows Executables](https://github.com/jordanmaulana/eml-extractor/releases/EMLExtractorGUI.exe)**
 
 - **EMLExtractorGUI.exe**: Graphical interface (recommended)
-- **EMLExtractorCLI.exe**: Command line interface
 - No Python installation required
 - Simply download, extract, and run
 
@@ -44,32 +43,6 @@ The GUI provides:
 - **Processing Log**: Color-coded log showing extraction details
 - **Error Handling**: Clear error messages and warnings
 - **Statistics**: Live count of successful and failed extractions
-
-### Command Line Interface
-
-#### Basic Usage
-
-```bash
-python main.py <input_folder>
-```
-
-#### With Custom Output Folder
-
-```bash
-python main.py <input_folder> <output_folder>
-```
-
-### Arguments
-
-- `input_folder` (required): Folder containing `.eml` files
-- `output_folder` (optional): Base folder for extracted content (default: `extracted_emails`)
-
-### Examples
-
-```bash
-python main.py my_emails/
-python main.py my_emails/ output/
-```
 
 ## Output Structure
 
@@ -141,11 +114,17 @@ Each email's `headers.txt` includes:
    python gui.py
    ```
    
+The GUI provides:
+- **Folder Selection**: Browse buttons for input and output folders
+- **Progress Tracking**: Real-time progress bar and status updates
+- **Processing Log**: Color-coded log showing extraction details
+- **Error Handling**: Clear error messages and warnings
+- **Statistics**: Live count of successful and failed extractions
+   
 ### Option 3: Install as Package
 ```bash
 pip install -e .
 eml-extractor-gui  # Launch GUI
-eml-extractor      # Launch CLI
 ```
 
 ### Option 4: Build Executables
@@ -167,7 +146,6 @@ python build.py all        # Build for all platforms
 ```bash
 pip install pyinstaller
 pyinstaller --onefile --windowed --name="EML Extractor" gui.py
-pyinstaller --onefile --console --name="eml-extractor-cli" main.py
 ```
 
 ## Executable Distributions
@@ -176,15 +154,12 @@ After building, executables will be available in the `dist/` directory:
 
 ### Windows
 - **EMLExtractorGUI.exe**: Graphical interface
-- **EMLExtractorCLI.exe**: Command line interface
 
 ### macOS
 - **EML Extractor.app**: Native app bundle
-- **eml-extractor-cli**: Command line executable
 
 ### Linux
 - **eml-extractor-gui**: Graphical executable
-- **eml-extractor-cli**: Command line executable
 - **install.sh**: Installation script for system-wide installation
 
 ## Error Handling

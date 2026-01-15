@@ -21,9 +21,9 @@ def install_pyinstaller():
         print("✓ PyInstaller installed successfully")
 
 def build_executable():
-    """Build Linux executables"""
+    """Build Linux executable"""
     print("\n" + "="*60)
-    print("BUILDING LINUX EXECUTABLES")
+    print("BUILDING LINUX EXECUTABLE")
     print("="*60)
     
     # Install PyInstaller
@@ -59,45 +59,18 @@ def build_executable():
         print(f"✗ GUI build failed: {e}")
         return False
     
-    # Build CLI executable
-    print("\nBuilding CLI executable...")
-    cli_cmd = [
-        sys.executable, "-m", "PyInstaller",
-        "--onefile",
-        "--name=eml-extractor-cli",
-        "--icon=NONE",
-        "--distpath=dist/linux",
-        "--workpath=build/linux",
-        "--specpath=spec/linux",
-        "main.py"
-    ]
-    
-    try:
-        subprocess.check_call(cli_cmd)
-        print("✓ CLI executable built successfully")
-    except subprocess.CalledProcessError as e:
-        print(f"✗ CLI build failed: {e}")
-        return False
-    
     # Create output directory with proper structure
     output_dir = Path("dist/linux/EML_Extractor")
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Copy executables
+    # Copy executable
     gui_exe = Path("dist/linux/eml-extractor-gui")
-    cli_exe = Path("dist/linux/eml-extractor-cli")
     
     if gui_exe.exists():
         shutil.copy2(gui_exe, output_dir / "eml-extractor-gui")
         # Make executable
         os.chmod(output_dir / "eml-extractor-gui", 0o755)
         print(f"✓ Copied GUI executable to {output_dir}")
-    
-    if cli_exe.exists():
-        shutil.copy2(cli_exe, output_dir / "eml-extractor-cli")
-        # Make executable
-        os.chmod(output_dir / "eml-extractor-cli", 0o755)
-        print(f"✓ Copied CLI executable to {output_dir}")
     
     # Create desktop entry for GUI
     desktop_entry = """[Desktop Entry]
@@ -128,10 +101,9 @@ DESKTOP_DIR="$HOME/.local/share/applications"
 mkdir -p "$INSTALL_DIR"
 mkdir -p "$DESKTOP_DIR"
 
-# Install executables
-echo "Installing executables to $INSTALL_DIR..."
+# Install executable
+echo "Installing executable to $INSTALL_DIR..."
 cp eml-extractor-gui "$INSTALL_DIR/"
-cp eml-extractor-cli "$INSTALL_DIR/"
 
 # Install desktop entry
 echo "Installing desktop entry..."
@@ -154,8 +126,7 @@ echo "You can now run 'eml-extractor-gui' from the terminal or find it in your a
     readme_content = """# EML Extractor - Linux Version
 
 ## Files
-- **eml-extractor-gui**: Graphical user interface version (recommended)
-- **eml-extractor-cli**: Command line interface version
+- **eml-extractor-gui**: Graphical user interface
 - **eml-extractor.desktop**: Desktop entry file
 - **install.sh**: Installation script
 
@@ -166,11 +137,10 @@ Run the installation script:
 ./install.sh
 ```
 
-This will install the executables to ~/.local/bin and add a desktop entry.
+This will install the executable to ~/.local/bin and add a desktop entry.
 
 ## Manual Install
 
-### GUI Version
 ```bash
 cp eml-extractor-gui ~/.local/bin/
 chmod +x ~/.local/bin/eml-extractor-gui
@@ -179,17 +149,6 @@ chmod +x ~/.local/bin/eml-extractor-gui
 Then run from terminal:
 ```bash
 eml-extractor-gui
-```
-
-### CLI Version
-```bash
-cp eml-extractor-cli ~/.local/bin/
-chmod +x ~/.local/bin/eml-extractor-cli
-```
-
-Then run from terminal:
-```bash
-eml-extractor-cli <input_folder> [output_folder]
 ```
 
 ## Requirements
@@ -208,9 +167,8 @@ eml-extractor-cli <input_folder> [output_folder]
     with open(output_dir / "README.txt", "w", encoding="utf-8") as f:
         f.write(readme_content)
     
-    print(f"\n✓ Linux executables created in: {output_dir.absolute()}")
+    print(f"\n✓ Linux executable created in: {output_dir.absolute()}")
     print(f"  - eml-extractor-gui: {gui_exe.stat().st_size / (1024*1024):.1f} MB")
-    print(f"  - eml-extractor-cli: {cli_exe.stat().st_size / (1024*1024):.1f} MB")
     print(f"  - Installation script: install.sh")
     
     return True
