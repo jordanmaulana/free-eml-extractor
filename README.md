@@ -38,6 +38,7 @@ python gui.py
 ```
 
 The GUI provides:
+
 - **Folder Selection**: Browse buttons for input and output folders
 - **Progress Tracking**: Real-time progress bar and status updates
 - **Processing Log**: Color-coded log showing extraction details
@@ -99,7 +100,7 @@ Each email's `headers.txt` includes:
 
 ### Option 1: Windows Executable (Easiest)
 
-**[📥 Download Windows Executables](https://github.com/yourusername/eml-extractor/releases/latest)**
+**[📥 Download Windows Executables](https://github.com/jordanmaulana/free-eml-extractor/blob/main/releases/windows/EMLExtractorGUI.exe)**
 
 1. Download the latest Windows release
 2. Extract the ZIP file
@@ -113,15 +114,17 @@ Each email's `headers.txt` includes:
    ```bash
    python gui.py
    ```
-   
+
 The GUI provides:
+
 - **Folder Selection**: Browse buttons for input and output folders
 - **Progress Tracking**: Real-time progress bar and status updates
 - **Processing Log**: Color-coded log showing extraction details
 - **Error Handling**: Clear error messages and warnings
 - **Statistics**: Live count of successful and failed extractions
-   
+
 ### Option 3: Install as Package
+
 ```bash
 pip install -e .
 eml-extractor-gui  # Launch GUI
@@ -130,11 +133,13 @@ eml-extractor-gui  # Launch GUI
 ### Option 4: Build Executables
 
 #### Quick Build (Auto-detect platform)
+
 ```bash
 python build.py
 ```
 
 #### Platform-specific Builds
+
 ```bash
 python build.py windows    # Build Windows .exe files
 python build.py macos      # Build macOS .app bundle
@@ -143,6 +148,7 @@ python build.py all        # Build for all platforms
 ```
 
 #### Manual Build with PyInstaller
+
 ```bash
 pip install pyinstaller
 pyinstaller --onefile --windowed --name="EML Extractor" gui.py
@@ -153,12 +159,15 @@ pyinstaller --onefile --windowed --name="EML Extractor" gui.py
 After building, executables will be available in the `dist/` directory:
 
 ### Windows
+
 - **EMLExtractorGUI.exe**: Graphical interface
 
 ### macOS
+
 - **EML Extractor.app**: Native app bundle
 
 ### Linux
+
 - **eml-extractor-gui**: Graphical executable
 - **install.sh**: Installation script for system-wide installation
 
