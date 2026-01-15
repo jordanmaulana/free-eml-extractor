@@ -100,7 +100,7 @@ Each email's `headers.txt` includes:
 
 ### Option 1: Windows Executable (Easiest)
 
-**[📥 Download Windows Executables](https://github.com/jordanmaulana/free-eml-extractor/blob/main/releases/windows/EMLExtractorGUI.exe)**
+**[📥 Download Windows Executables](https://github.com/jordanmaulana/free-eml-extractor/releases/windows/EMLExtractorGUI.exe)**
 
 1. Download the latest Windows release
 2. Extract the ZIP file
