@@ -19,6 +19,17 @@ A Python utility to batch extract and process `.eml` files, converting each emai
 
 ## Usage
 
+### Windows Executable Download (Easiest)
+
+Download the pre-built Windows executables:
+
+**[📥 Download Windows Executables](https://github.com/yourusername/eml-extractor/releases/latest)**
+
+- **EMLExtractorGUI.exe**: Graphical interface (recommended)
+- **EMLExtractorCLI.exe**: Command line interface
+- No Python installation required
+- Simply download, extract, and run
+
 ### Graphical User Interface (Recommended)
 
 Launch the modern GUI application:
@@ -113,18 +124,68 @@ Each email's `headers.txt` includes:
 
 ## Installation
 
+### Option 1: Windows Executable (Easiest)
+
+**[📥 Download Windows Executables](https://github.com/yourusername/eml-extractor/releases/latest)**
+
+1. Download the latest Windows release
+2. Extract the ZIP file
+3. Double-click `EMLExtractorGUI.exe` to launch the GUI
+4. No Python installation required!
+
+### Option 2: Run from Source (Recommended for developers)
+
 1. Clone or download this repository
 2. Run the GUI directly:
    ```bash
    python gui.py
    ```
    
-Or install as a package (if you have the project setup):
+### Option 3: Install as Package
 ```bash
 pip install -e .
 eml-extractor-gui  # Launch GUI
 eml-extractor      # Launch CLI
 ```
+
+### Option 4: Build Executables
+
+#### Quick Build (Auto-detect platform)
+```bash
+python build.py
+```
+
+#### Platform-specific Builds
+```bash
+python build.py windows    # Build Windows .exe files
+python build.py macos      # Build macOS .app bundle
+python build.py linux      # Build Linux executables
+python build.py all        # Build for all platforms
+```
+
+#### Manual Build with PyInstaller
+```bash
+pip install pyinstaller
+pyinstaller --onefile --windowed --name="EML Extractor" gui.py
+pyinstaller --onefile --console --name="eml-extractor-cli" main.py
+```
+
+## Executable Distributions
+
+After building, executables will be available in the `dist/` directory:
+
+### Windows
+- **EMLExtractorGUI.exe**: Graphical interface
+- **EMLExtractorCLI.exe**: Command line interface
+
+### macOS
+- **EML Extractor.app**: Native app bundle
+- **eml-extractor-cli**: Command line executable
+
+### Linux
+- **eml-extractor-gui**: Graphical executable
+- **eml-extractor-cli**: Command line executable
+- **install.sh**: Installation script for system-wide installation
 
 ## Error Handling
 
@@ -134,5 +195,6 @@ eml-extractor      # Launch CLI
 
 ## Version
 
+v2.2 - Added cross-platform executable builds
 v2.1 - Added modern graphical user interface
 v2.0 - Improved filename sanitization for attachment safety

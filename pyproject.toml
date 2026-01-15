@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.8"
 dependencies = []
 
+[project.optional-dependencies]
+build = ["pyinstaller>=6.0"]
+
 [project.scripts]
 eml-extractor = "main:main"
 eml-extractor-gui = "gui:main"
